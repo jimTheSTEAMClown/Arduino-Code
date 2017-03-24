@@ -1,0 +1,43 @@
+// ============================================================================
+// Source: Squeaky Hinge // www.squeakyhinge.com/arduino
+// Hacker: Jim Burnham // Chief Engineer, Maker, Propmaster & Adrenologist 
+// Create Date:			06/09/2015 
+// Design Name:			steamClass_DebugBlinkLoop3_STEAM_Clown
+// Description:			adaptation of blink on http://arduino.cc/
+// This example code is in the public domain.  
+// ============================================================================
+
+const int arduinoBoardLED = 13;		// define as constant integer on pin 13
+int timeStart;
+int timeStop;
+int loopCouonter = 0; // counter to count the times through the loop
+// ------------------------------------------------------------------------------------
+// the setup function runs once when you press reset or power the board
+void setup() 
+{
+	Serial.begin(9600);           // Use Serial Monitor to debug
+ 	// initialize digital pin 13 as an output.
+ 	pinMode(arduinoBoardLED, OUTPUT); // LED on pin 13
+}
+// ------------------------------------------------------------------------------------
+// the loop function runs over and over again forever
+void loop() {
+  timeStart = millis(); // gets the top of loop time
+  if (loopCouonter == 250)
+  {
+      // If /Then /Else Loop
+  }
+  delay(10);
+  timeStop = millis();
+  Serial.print("Loop Start: ");
+  Serial.print("\t");
+  //prints time since program started
+  Serial.print(timeStart);
+  Serial.print("\t");
+  Serial.print("Loop Stop: ");
+  Serial.print("\t");
+  Serial.print(timeStop);
+  Serial.print("\t");
+  Serial.print("Total Loop Time = ");
+  Serial.println(timeStop - timeStart);
+}
