@@ -1,0 +1,42 @@
+// ============================================================================
+// Source: Squeaky Hinge // www.steamclown.org/arduino
+// Hacker: Jim Burnham // Chief Engineer, Maker, Propmaster & Adrenologist 
+// Create Date:			06/09/2015 
+// Design Name:			steamClass_If_STEAM_Clown
+// Description:			adaptation of blink on http://arduino.cc/
+// This example code is in the public domain.  
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// define variables that will be used in the sketch
+// ----------------------------------------------------------------------------
+const int arduinoBoardLED = 13;		// LED on pin 13 
+
+int myDelayTime = 0;	// Use to control the delay time used when calling delay() function
+	
+// ============================================================================
+// The setup routine runs once when you load the sketch or press reset:
+// This is where you define pin directions
+void setup()
+{
+
+	Serial.begin(9600);           // Use Serial Monitor to debug
+	pinMode(arduinoBoardLED, OUTPUT);
+}
+
+// ============================================================================
+// the "main" loop routine runs over and over again forever:
+void loop()
+{
+	digitalWrite(arduinoBoardLED, HIGH); //Set the LED pin to HIGH. This turns it On
+	delay(myDelayTime);	
+	digitalWrite(arduinoBoardLED, LOW);	//Set the LED pin to LOW. This turns it Off
+	delay(myDelayTime);	
+	Serial.print(".");		
+	myDelayTime = myDelayTime + 20;	
+	if (myDelayTime > 500)	  
+   	{	    
+   		myDelayTime = 10;	    
+   		Serial.println("R");
+   	}
+}
