@@ -1,0 +1,41 @@
+// ============================================================================
+// Source: Squeaky Hinge // www.squeakyhinge.com/arduino
+// Hacker: Jim Burnham // Chief Engineer, Maker, Propmaster & Adrenologist 
+// Create Date:      06/09/2015 
+// Design Name:     steamClass_IntRollOver_STEAM_Clown
+// Description:     adaptation of blink on http://arduino.cc/
+// This example code is in the public domain.  
+// ============================================================================
+
+int intRollOver = 32764;
+
+
+const int arduinoBoardLED = 13;   // define as constant integer on pin 13 
+
+// ============================================================================
+// The setup routine runs once when you load the sketch or press reset:
+// This is where you define pin directions
+void setup()
+{
+  Serial.begin(9600);           // Use Serial Monitor to debug
+  // initialize the pins used in this sketch
+  pinMode(arduinoBoardLED, OUTPUT);
+}
+
+// this "main" loop routine runs over and over again forever:
+void loop()
+{
+  
+  while(intRollOver != -32764){
+    Serial.print("Intiger =  ");  // this prints text, but no line feed or return
+      Serial.println(intRollOver); // this prints a signed integer
+        intRollOver++;
+    }
+  
+  //Set pin 13 to HIGH. This provides 5 volts to the LED and turns it on
+  digitalWrite(arduinoBoardLED, HIGH);
+  delay(10);  //Wait for a second
+  //Set pin 13 LOW and This turns the LED off
+  digitalWrite(arduinoBoardLED, LOW);
+  delay(10);  //Wait for a second
+}
