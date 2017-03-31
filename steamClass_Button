@@ -1,0 +1,68 @@
+// ============================================================================
+// Source: Squeaky Hinge // www.squeakyhinge.com/arduino
+// Hacker: Jim Burnham // Chief Engineer, Maker, Propmaster & Adrenologist 
+// Design Name:			steamLabs_Servo_SqueakyHinge
+// Description:		This is an example of a push button input
+//					This code will detect a button push, and will change the 
+//					value of buttonStatus every tome it tests buttonPin in 
+//					the digitalRead function.  The status of buttonStatus is 
+//					not persistent, and will alwasy follow what is read on 
+//					the buttonPin
+// This example code is in the public domain.  
+//
+// Dependencies: 
+//
+// Revisions: 
+// Revision 0.01 - Sketch// Created - 06/24/15
+// Additional Comments: 
+//
+// ============================================================================
+//
+// ----------------------------------------------------------------------------
+// define included libraries that will be used in the sketch
+// ----------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------
+// the define variables that will be used in the sketch
+// ----------------------------------------------------------------------------
+// These are constants, and the sketch won't change these values while running. 
+// Typically these are pin labels and pin assignments:
+// These are ones I use as defaults in most of my sketches
+const int arduinoBoardLED = 13;		// LED on pin 13 
+const int buttonPin = A0;	// Input on pin Analog Pin 0 
+int buttonStatus = LOW;		// variable for reading the status buttonPin on Pin
+
+// ============================================================================
+// The setup routine runs once when you load the sketch or press reset:
+// This is where you define pin directions
+void setup()
+{
+	Serial.begin(9600);           // Use Serial Monitor to debug
+	// initialize the digital pin as an output.
+	pinMode(arduinoBoardLED, OUTPUT);
+	pinMode(buttonPin, INPUT);	
+	digitalWrite(buttonPin, HIGH);  // set pullup on analog pin 0
+}
+
+// ============================================================================
+// the loop routine runs over and over again forever:
+void loop()
+{
+	buttonStatus = digitalRead(buttonPin);
+	if (buttonStatus == HIGH)
+	{
+		digitalWrite(arduinoBoardLED, HIGH);
+    	Serial.println ("Detected PushButton signal");
+		// This is where you would put code that you wanted to happen when 
+		// buttonStatus is HIGH
+		delay(100);
+	}
+    else // buttonStatus == LOW
+    {	
+    	digitalWrite(arduinoBoardLED, LOW);
+    	Serial.println ("Waiting to Detect pushButton signal");
+    	// This is where you would put code that you wanted to happen when 
+		// buttonStatus is lOW
+	   	delay(100);
+	}
+}
