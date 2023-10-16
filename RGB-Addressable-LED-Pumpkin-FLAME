@@ -1,0 +1,106 @@
+#include <FastLED.h>
+
+#define LED_PIN     5
+#define NUM_LEDS    9
+long rand_color1;
+long rand_delay;
+long rand_talk;
+int pumpkin1 = 0;
+int pumpkin2 = 0;
+int pumpkin3 = 0;
+
+int LED_pointer = 0;
+
+CRGB leds[NUM_LEDS];
+int HexColor[2];
+void setup() {
+  Serial.begin(9600);
+  FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
+  randomSeed(analogRead(0));
+  for (int x=0; x < NUM_LEDS; x++)
+  {
+    leds[x] = CRGB(0, 255, 0);
+    FastLED.show();
+    delay(20);
+  }
+  delay(1000);
+  for (int x=0; x < NUM_LEDS; x++)
+  {
+    leds[x] = CRGB(0, 0, 0);
+    FastLED.show();
+    delay(20);
+  }
+  delay(1000);
+}
+
+
+int OneLEDflameFlicker(){
+  // This function picks a random color in some range of "Organge/Yellow'ish"
+  // Need to still tune these color switch selections
+  // Returns a 3 RGB Colors
+  //int HexColor = 0x000000;
+  rand_color1 = random(1,100);
+  //rand_color1 = 10;
+  switch (rand_color1) {
+  case 1:
+  // White'ish/Yellow
+    HexColor[0] = 255;
+    HexColor[1] = 255;
+    HexColor[2] = 0;  
+    break;
+  case 2:
+  // Yellow'ish/Orange
+    HexColor[0] = 245;
+    HexColor[1] = 140;
+    HexColor[2] = 0;  
+    break;
+  case 3:
+    // red
+    HexColor[0] = 255;
+    HexColor[1] = 0;
+    HexColor[2] = 0;
+    break;  
+  case 4:
+    //  "fire" rgb(226,88,34)
+    HexColor[0] = 226;
+    HexColor[1] = 88;
+    HexColor[2] = 34;  
+    break;
+    case 5:
+    //  HexColor = 0xFF0033; // "Dark Red" rgb(244,55,66)
+    HexColor[0] = 244;
+    HexColor[1] = 55;
+    HexColor[2] = 66;  
+    break;
+    case 6:
+    // "hot blue'ish" rgb(50,0,255)
+    HexColor[0] = 66;
+    HexColor[1] = 0;
+    HexColor[2] = 255;  
+    break;
+  default:
+  // Yellow'ish/Orange
+    HexColor[0] = 245;
+    HexColor[1] = 140;
+    HexColor[2] = 0;  
+    break;
+  }
+  //return HexColor[0], HexColor[1], HexColor[2];
+  //return HexColor;
+}
+int flameFlicker(int three_LEDs){
+  // Just turning them RBG, but will make this a flame flicker function
+  int flameFlicker_offset1 = three_LEDs;
+  int flameFlicker_offset2 = three_LEDs+1;
+  int flameFlicker_offset3 = three_LEDs+2;
+  OneLEDflameFlicker();
+  leds[flameFlicker_offset1] = CRGB(HexColor[0], HexColor[1], HexColor[2]);
+  FastLED.show();
+  OneLEDflameFlicker();
+  leds[flameFlicker_offset2] = CRGB(HexColor[0], HexColor[1], HexColor[2]);
+  FastLED.show();
+  OneLEDflameFlicker();
+  leds[flameFlicker_offset3] = CRGB(HexColor[0], HexColor[1], HexColor[2]);
+  FastLED.show();
+ 
+}
