@@ -2,8 +2,8 @@
 int oscilloscope_pin = 2;
 String inputString = "";         // a String to hold incoming data
 bool stringComplete = false;  // whether the string is complete
-int freq = 3400;
-
+float freq = 1000.00;
+float duty = 1.0;
 void setup() {
   // initialize the pins used in this sketch
   pinMode(oscilloscope_pin, OUTPUT);
@@ -12,6 +12,10 @@ void setup() {
   // reserve 200 bytes for the inputString:
   Serial.print("Startup Frequency = ");
   Serial.println(freq);
+  Serial.print("Startup Duty Cycle = ");
+  float duty = 1.0 / freq;
+  Serial.print(duty,8);
+  Serial.println(" seconds");
   Serial.println("To Change, Enter A New Frequency > ");
   tone(oscilloscope_pin,freq);
 }
@@ -39,6 +43,12 @@ void loop() {
 if (stringComplete) {
     Serial.println(inputString);
     freq = inputString.toInt();
+    Serial.print("New Frequency = ");
+    Serial.println(freq);
+    Serial.print("New Duty Cycle = ");
+    float duty = 1.0 / freq;
+    Serial.print(duty,8);
+    Serial.println(" seconds");
     //Serial.println(inputString);
     tone(oscilloscope_pin,freq); 
     // clear the string:
